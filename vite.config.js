@@ -1,4 +1,6 @@
 // vite.config.js
-export default {
+import { defineConfig } from 'vite';
+
+export default defineConfig({
   base: process.env.GITHUB_PAGES ? '/high-school-portal/' : '/',
-}
+});
