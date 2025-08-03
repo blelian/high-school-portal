@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Algebra I",
+    "teacherId": 3,
+    "schedule": "Mon/Wed/Fri 9:00-10:00"
+  },
+  {
+    "id": 2,
+    "name": "English Literature",
+    "teacherId": 4,
+    "schedule": "Tue/Thu 10:00-11:30"
+  }
+]

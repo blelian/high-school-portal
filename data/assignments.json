@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "classId": 1,
+    "title": "Math Homework 1",
+    "description": "Complete exercises 1-10 on page 23.",
+    "dueDate": "2025-08-10",
+    "submitted": false,
+    "studentId": 2
+  }
+]

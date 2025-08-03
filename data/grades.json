@@ -1,0 +1,14 @@
+[
+  {
+    "studentId": 2,
+    "classId": 1,
+    "grade": "A",
+    "term": "Fall 2025"
+  },
+  {
+    "studentId": 2,
+    "classId": 2,
+    "grade": "B+",
+    "term": "Fall 2025"
+  }
+]

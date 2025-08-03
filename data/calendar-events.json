@@ -1,0 +1,15 @@
+
+[
+  {
+    "id": 1,
+    "event": "Midterm Exams",
+    "date": "2025-09-01",
+    "type": "Exam"
+  },
+  {
+    "id": 2,
+    "event": "Parent-Teacher Meeting",
+    "date": "2025-08-15",
+    "type": "Meeting"
+  }
+]
