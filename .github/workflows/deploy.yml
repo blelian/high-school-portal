@@ -3,14 +3,14 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # adjust if your main branch is named differently
+      - main  # change if your branch is different
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     env:
-      DEPLOY_ENV: github  # this matches vite.config.js for setting base path
+      GITHUB_PAGES: true
 
     steps:
       - name: Checkout repository
