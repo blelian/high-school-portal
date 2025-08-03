@@ -9,10 +9,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:github": "cross-env GITHUB_PAGES=true vite build",
     "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "vite": "^7.0.6"
+    "vite": "^7.0.6",
+    "cross-env": "^7.0.3"
   }
 }
