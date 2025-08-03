@@ -3,17 +3,20 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # or 'master' if that's your main branch
+      - main  # adjust if your main branch is named differently
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    env:
+      GITHUB_PAGES: true  # set environment variable for vite.config.js
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20

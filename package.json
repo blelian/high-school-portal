@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:github": "cross-env GITHUB_PAGES=true vite build",
+    "build:github": "vite build",
     "deploy:github": "npm run build:github && npx gh-pages -d dist",
     "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1"
