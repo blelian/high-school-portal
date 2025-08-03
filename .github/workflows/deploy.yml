@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      GITHUB_PAGES: true  # set environment variable for vite.config.js
+      DEPLOY_ENV: github  # this matches vite.config.js for setting base path
 
     steps:
       - name: Checkout repository

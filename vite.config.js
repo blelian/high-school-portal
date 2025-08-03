@@ -1,6 +1,8 @@
 // vite.config.js
 import { defineConfig } from 'vite';
 
+const isGitHubPages = process.env.DEPLOY_ENV === 'github';
+
 export default defineConfig({
-  base: process.env.GITHUB_PAGES ? '/high-school-portal/' : '/',
+  base: isGitHubPages ? '/high-school-portal/' : '/',
 });
