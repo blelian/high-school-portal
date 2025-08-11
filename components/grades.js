@@ -1,9 +1,18 @@
-import grades from '../data/grades.json' assert { type: 'json' };
+import { fetchLocalJSON } from './dataFetcher.js';
 
-export function renderGrades(studentId) {
+export async function renderGrades(studentId) {
   const container = document.createElement('div');
   container.className = 'card';
+  container.innerHTML = `<h2>Grades</h2><p>Loading...</p>`;
+
+  const grades = await fetchLocalJSON('grades.json');
   const studentGrades = grades.filter(g => g.studentId === studentId);
+
+  if (!studentGrades.length) {
+    container.innerHTML = `<h2>Grades</h2><p>No grades found.</p>`;
+    return container;
+  }
+
   container.innerHTML = `<h2>Grades</h2>
     <ul>
       ${studentGrades.map(g => `<li>Class ${g.classId}: ${g.grade} (${g.term})</li>`).join('')}

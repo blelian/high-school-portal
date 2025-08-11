@@ -1,11 +1,20 @@
 [
   {
-    "id": 1,
-    "classId": 1,
-    "title": "Math Homework 1",
-    "description": "Complete exercises 1-10 on page 23.",
+    "studentId": "alice@gmail.com",
+    "title": "Math Homework 5",
     "dueDate": "2025-08-10",
-    "submitted": false,
-    "studentId": 2
+    "submitted": true
+  },
+  {
+    "studentId": "bob@gmail.com",
+    "title": "English Essay",
+    "dueDate": "2025-08-15",
+    "submitted": false
+  },
+  {
+    "studentId": "alice@gmail.com",
+    "title": "Science Project",
+    "dueDate": "2025-08-20",
+    "submitted": false
   }
 ]

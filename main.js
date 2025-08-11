@@ -4,17 +4,51 @@ import { renderAssignments } from "./components/assignments.js";
 import { renderAnnouncements } from "./components/announcements.js";
 import { renderCalendar } from "./components/calendar.js";
 import { renderMessages } from "./components/messaging.js";
+import { renderAttendance } from "./components/attendance.js";
 import { renderAuth, getCurrentUser, logout } from "./components/auth.js";
+import { renderQuote } from "./components/quotes.js";
 
 console.log("✅ High School Portal loaded");
 
 let user = getCurrentUser();
 
-function renderView(viewFunction) {
+async function renderView(viewFunction) {
   const app = document.getElementById("app");
   app.innerHTML = "";
-  const view = viewFunction(user);
-  app.appendChild(view);
+
+  const container = document.createElement("div");
+  container.id = "view-container";
+  app.appendChild(container);
+
+  switch (viewFunction) {
+    case renderGrades:
+    case renderAssignments:
+    case renderAttendance:
+      {
+        const content = await viewFunction(user.email);
+        container.appendChild(content);
+      }
+      break;
+    case renderMessages:
+      {
+        const content = await viewFunction(user.name);
+        container.appendChild(content);
+      }
+      break;
+    case renderDashboard:
+      {
+        // Dashboard is async now because of quote fetch or other data
+        const content = await viewFunction(user);
+        container.appendChild(content);
+      }
+      break;
+    default:
+      {
+        const content = await viewFunction(user);
+        container.appendChild(content);
+      }
+      break;
+  }
 }
 
 function renderLoginScreen() {
@@ -22,54 +56,58 @@ function renderLoginScreen() {
   app.innerHTML = "";
   const loginView = renderAuth((loggedInUser) => {
     user = loggedInUser;
-    setupNavigation();
-    renderView(renderDashboard);
+    window.location.hash = "dashboard";
   });
   app.appendChild(loginView);
 }
 
-function setupNavigation() {
-  const links = document.querySelectorAll("nav a");
+async function onRouteChange() {
+  const hash = window.location.hash.slice(1);
 
-  links.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const page = link.textContent.trim().toLowerCase();
+  if (!user) {
+    renderLoginScreen();
+    return;
+  }
 
-      switch (page) {
-        case "dashboard":
-          renderView(renderDashboard);
-          break;
-        case "assignments":
-          renderView(renderAssignments);
-          break;
-        case "grades":
-          renderView(renderGrades);
-          break;
-        case "messages":
-          renderView(renderMessages);
-          break;
-        case "calendar":
-          renderView(renderCalendar);
-          break;
-        case "announcements":
-          renderView(renderAnnouncements);
-          break;
-        case "logout":
-          logout();
-          location.reload();
-          break;
-        default:
-          document.getElementById("app").innerHTML = `<p>Page not found.</p>`;
-      }
-    });
-  });
+  switch (hash) {
+    case "dashboard":
+      await renderView(renderDashboard);
+      break;
+    case "assignments":
+      await renderView(renderAssignments);
+      break;
+    case "grades":
+      await renderView(renderGrades);
+      break;
+    case "messages":
+      await renderView(renderMessages);
+      break;
+    case "calendar":
+      await renderView(renderCalendar);
+      break;
+    case "announcements":
+      await renderView(renderAnnouncements);
+      break;
+    case "attendance":
+      await renderView(renderAttendance);
+      break;
+    case "quotes":
+      await renderView(renderQuote);
+      break;
+    case "logout":
+      logout();
+      window.location.hash = "";
+      location.reload();
+      break;
+    default:
+      window.location.hash = "dashboard";
+  }
 }
 
-// Initialize app
+window.addEventListener("hashchange", onRouteChange);
+
 if (!user) {
   renderLoginScreen();
 } else {
-  setupNavigation();
-  renderView(renderDashboard);
+  onRouteChange();
 }

@@ -1,15 +1,17 @@
-
 [
   {
-    "id": 1,
-    "event": "Midterm Exams",
-    "date": "2025-09-01",
+    "event": "Math Exam",
+    "date": "2025-08-15",
     "type": "Exam"
   },
   {
-    "id": 2,
-    "event": "Parent-Teacher Meeting",
-    "date": "2025-08-15",
-    "type": "Meeting"
+    "event": "Science Fair",
+    "date": "2025-08-22",
+    "type": "Event"
+  },
+  {
+    "event": "School Holiday",
+    "date": "2025-08-30",
+    "type": "Holiday"
   }
 ]

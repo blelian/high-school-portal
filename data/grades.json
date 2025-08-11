@@ -1,14 +1,20 @@
 [
   {
-    "studentId": 2,
-    "classId": 1,
-    "grade": "A",
-    "term": "Fall 2025"
+    "studentId": "alice@gmail.com",
+    "classId": "1",
+    "grade": "85%",
+    "term": "Term 3"
   },
   {
-    "studentId": 2,
-    "classId": 2,
-    "grade": "B+",
-    "term": "Fall 2025"
+    "studentId": "alice@gmail.com",
+    "classId": "2",
+    "grade": "92%",
+    "term": "Term 3"
+  },
+  {
+    "studentId": "bob@gmail.com",
+    "classId": "3",
+    "grade": "78%",
+    "term": "Term 3"
   }
 ]
