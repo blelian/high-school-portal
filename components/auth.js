@@ -29,7 +29,7 @@ export function renderAuth(onLoginSuccess) {
       return;
     }
 
-    const users = await fetchLocalJSON('users.json');
+    const users = await fetchLocalJSON('users.json'); // path stays the same
     const user = users.find(u => u.email === email);
     if (!user) {
       alert("User not found.");
