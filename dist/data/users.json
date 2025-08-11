@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "role": "parent",
+    "name": "Jane Doe",
+    "email": "jane@example.com",
+    "children": [2]
+  },
+  {
+    "id": 2,
+    "role": "student",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "parentId": 1
+  },
+  {
+    "id": 3,
+    "role": "teacher",
+    "name": "Ms. Smith",
+    "email": "smith@example.com",
+    "classes": [1]
+  },
+  {
+    "id": 4,
+    "role": "teacher",
+    "name": "Mr. Brown",
+    "email": "brown@example.com",
+    "classes": [2]
+  }
+]

@@ -1,15 +1,16 @@
 import { defineConfig } from 'vite';
-import copy from 'rollup-plugin-copy';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
   base: process.env.GITHUB_PAGES ? '/high-school-portal/' : '/',
   plugins: [
-    copy({
+    viteStaticCopy({
       targets: [
-        { src: 'components/*.json', dest: 'dist/data' }
-      ],
-      hook: 'buildStart',
-      verbose: true // optional: logs what is copied
+        {
+          src: 'data/*.json',  // source folder for JSON files
+          dest: 'data'         // destination folder inside dist/
+        }
+      ]
     })
   ]
 });

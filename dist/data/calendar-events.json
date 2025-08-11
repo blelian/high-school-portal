@@ -1,0 +1,17 @@
+[
+  {
+    "event": "Math Exam",
+    "date": "2025-08-15",
+    "type": "Exam"
+  },
+  {
+    "event": "Science Fair",
+    "date": "2025-08-22",
+    "type": "Event"
+  },
+  {
+    "event": "School Holiday",
+    "date": "2025-08-30",
+    "type": "Holiday"
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "studentId": "alice@gmail.com",
+    "date": "2025-08-03",
+    "status": "Present"
+  },
+  {
+    "studentId": "alice@gmail.com",
+    "date": "2025-08-04",
+    "status": "Absent"
+  },
+  {
+    "studentId": "bob@gmail.com",
+    "date": "2025-08-03",
+    "status": "Present"
+  }
+]

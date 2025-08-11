@@ -1,0 +1,20 @@
+[
+  {
+    "from": "TeacherJohn",
+    "to": "alice",
+    "message": "Please remember to submit your Science project by the deadline.",
+    "date": "2025-08-05"
+  },
+  {
+    "from": "alice",
+    "to": "TeacherJohn",
+    "message": "Thank you! I’m working on it.",
+    "date": "2025-08-06"
+  },
+  {
+    "from": "ParentJane",
+    "to": "TeacherJohn",
+    "message": "Can we schedule a call to discuss my child's progress?",
+    "date": "2025-08-06"
+  }
+]
