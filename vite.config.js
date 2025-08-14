@@ -1,36 +1,17 @@
-// vite.config.js
 import { defineConfig } from 'vite';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
+import path from 'path';
 
 export default defineConfig({
   base: process.env.GITHUB_PAGES ? '/high-school-portal/' : '/',
-  plugins: [
-    viteStaticCopy({
-      targets: [
-        {
-          src: 'data/*.json',  // copy all JSON files from data/
-          dest: 'data'         // into dist/data/
-        }
-      ]
-    })
-  ],
-  server: {
-    // Ensure proper handling of /data/ files locally
-    fs: {
-      allow: ['.']
-    }
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './components'),
+    },
   },
+  publicDir: 'data', // <-- treat your existing 'data' folder as static assets
   build: {
     rollupOptions: {
-      output: {
-        // Preserve folder structure for JSON files
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name && assetInfo.name.endsWith('.json')) {
-            return 'data/[name][extname]';
-          }
-          return 'assets/[name]-[hash][extname]';
-        },
-      },
+      input: path.resolve(__dirname, 'index.html'), // main entry
     },
   },
 });
