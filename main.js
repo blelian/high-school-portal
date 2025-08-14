@@ -12,7 +12,7 @@ console.log("✅ High School Portal loaded");
 
 let user = getCurrentUser();
 
-// Renders a view function into #app
+// Render a view function into #app
 async function renderView(viewFunction) {
   const app = document.getElementById("app");
   app.innerHTML = "";
@@ -22,21 +22,12 @@ async function renderView(viewFunction) {
   app.appendChild(container);
 
   let content;
-  switch (viewFunction) {
-    case renderGrades:
-    case renderAssignments:
-    case renderAttendance:
-      content = await viewFunction(user.email);
-      break;
-    case renderMessages:
-      content = await viewFunction(user.name);
-      break;
-    case renderDashboard:
-      content = await viewFunction(user);
-      break;
-    default:
-      content = await viewFunction(user);
-      break;
+  if ([renderGrades, renderAssignments, renderAttendance].includes(viewFunction)) {
+    content = await viewFunction(user.email);
+  } else if (viewFunction === renderMessages) {
+    content = await viewFunction(user.name);
+  } else {
+    content = await viewFunction(user);
   }
 
   container.appendChild(content);
@@ -63,30 +54,14 @@ async function onRouteChange() {
   }
 
   switch (hash) {
-    case "dashboard":
-      await renderView(renderDashboard);
-      break;
-    case "assignments":
-      await renderView(renderAssignments);
-      break;
-    case "grades":
-      await renderView(renderGrades);
-      break;
-    case "messages":
-      await renderView(renderMessages);
-      break;
-    case "calendar":
-      await renderView(renderCalendar);
-      break;
-    case "announcements":
-      await renderView(renderAnnouncements);
-      break;
-    case "attendance":
-      await renderView(renderAttendance);
-      break;
-    case "quotes":
-      await renderView(renderQuote);
-      break;
+    case "dashboard":      await renderView(renderDashboard); break;
+    case "assignments":    await renderView(renderAssignments); break;
+    case "grades":         await renderView(renderGrades); break;
+    case "messages":       await renderView(renderMessages); break;
+    case "calendar":       await renderView(renderCalendar); break;
+    case "announcements":  await renderView(renderAnnouncements); break;
+    case "attendance":     await renderView(renderAttendance); break;
+    case "quotes":         await renderView(renderQuote); break;
     case "logout":
       logout();
       window.location.hash = "";
@@ -94,14 +69,13 @@ async function onRouteChange() {
       break;
     default:
       window.location.hash = "dashboard";
-      break;
   }
 }
 
 // Listen for hash changes
 window.addEventListener("hashchange", onRouteChange);
 
-// Initial page load
+// Initial load
 if (!user) {
   renderLoginScreen();
 } else {
