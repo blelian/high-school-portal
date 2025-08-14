@@ -1,18 +1,35 @@
-// components/dataFetcher.js
-// This version works with JSON files inside src/data/
-// No need to move files to public
+// dataFetcher.js
+const MASTER_KEY = '$2a$10$5.mnlL9UuMbrX6BvH6FUmOU5EPySbRonmr8.gDv/QFg.BaWuOcvL2';
 
-// Import the JSON directly
-import users from '../data/users.json'; // adjust path if needed
+const BIN_URLS = {
+  users: 'https://api.jsonbin.io/v3/b/689d5bdc43b1c97be91de91b/latest',
+  assignments: 'https://api.jsonbin.io/v3/b/689d5c85ae596e708fc99f19/latest',
+  attendance: 'https://api.jsonbin.io/v3/b/689d5cd543b1c97be91de982/latest',
+  grades: 'https://api.jsonbin.io/v3/b/689d5d1ad0ea881f4058d14e/latest',
+  messages: 'https://api.jsonbin.io/v3/b/689d5d80ae596e708fc99f70/latest'
+};
 
-// Generic fetch function for your project
-export async function fetchLocalJSON(fileName) {
-  // Currently only supports users.json
-  if (fileName === 'users.json') {
-    console.log(`${fileName} loaded:`, users);
-    return users;
+/**
+ * Fetch JSON data from JSONBin.io
+ * @param {string} key - 'users', 'assignments', 'attendance', 'grades', 'messages'
+ */
+export async function fetchJSONBin(key) {
+  try {
+    const url = BIN_URLS[key];
+    if (!url) throw new Error(`No JSONBin URL found for key: ${key}`);
+
+    const res = await fetch(url, {
+      headers: {
+        'X-Master-Key': MASTER_KEY
+      }
+    });
+
+    if (!res.ok) throw new Error(`Failed to fetch ${key}: ${res.status}`);
+
+    const data = await res.json();
+    return data.record; // JSONBin v3 stores actual data in .record
+  } catch (err) {
+    console.error(`Error fetching ${key}:`, err);
+    return [];
   }
-
-  console.warn(`fetchLocalJSON: No data available for "${fileName}"`);
-  return [];
 }
