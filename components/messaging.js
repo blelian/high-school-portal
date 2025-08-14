@@ -1,21 +1,16 @@
-import { fetchJSONBin } from './dataFetcher.js';
+import { messages } from './data.js';
 
 export async function renderMessages(userName) {
   const container = document.createElement('div');
   container.className = 'card';
-  container.innerHTML = `<h2>Messages</h2><p>Loading...</p>`;
 
-  const messages = await fetchJSONBin('messages');
   const userMessages = messages.filter(m => m.from === userName || m.to === userName);
 
-  if (!userMessages.length) {
-    container.innerHTML = `<h2>Messages</h2><p>No messages found.</p>`;
-    return container;
-  }
+  container.innerHTML = `<h2>Messages</h2>` +
+    (userMessages.length
+      ? `<ul>${userMessages.map(m => `<li><strong>${m.from}</strong> to <strong>${m.to}</strong>: ${m.message} (${m.date})</li>`).join('')}</ul>`
+      : `<p>No messages found.</p>`
+    );
 
-  container.innerHTML = `<h2>Messages</h2>
-    <ul>
-      ${userMessages.map(m => `<li><strong>${m.from}</strong> to <strong>${m.to}</strong>: ${m.message} (${m.date})</li>`).join('')}
-    </ul>`;
   return container;
 }

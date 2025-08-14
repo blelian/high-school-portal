@@ -80,8 +80,10 @@ async function onRouteChange() {
   }
 }
 
+// Listen for hash changes (navigation)
 window.addEventListener("hashchange", onRouteChange);
 
+// Initial load
 if (!user) {
   renderLoginScreen();
 } else {
