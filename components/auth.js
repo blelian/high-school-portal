@@ -26,7 +26,6 @@ export function renderAuth(onLoginSuccess) {
 
     const email = container.querySelector("#email").value.trim();
     const password = container.querySelector("#password").value.trim();
-
     debugLog.textContent = ""; // Clear previous debug logs
 
     if (!email || !password) {
@@ -35,17 +34,10 @@ export function renderAuth(onLoginSuccess) {
     }
 
     try {
-      // Detect GitHub Pages or local
-      const basePath = window.location.hostname.includes('github.io')
-        ? '/high-school-portal'
-        : '';
+      const users = await fetchLocalJSON('users.json'); // just filename
 
-      debugLog.textContent += `Fetching users from: ${basePath}/data/users.json\n`;
-
-      const users = await fetchLocalJSON(`${basePath}/data/users.json`);
-
-      debugLog.textContent += `Users loaded: ${JSON.stringify(users)}\n`;
       debugLog.textContent += `Login attempt: email='${email}', password='${password}'\n`;
+      debugLog.textContent += `Users loaded: ${JSON.stringify(users)}\n`;
 
       const user = users.find(u => u.email === email && u.password === password);
 

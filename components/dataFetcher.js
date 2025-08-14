@@ -1,16 +1,23 @@
 // dataFetcher.js
-export async function fetchLocalJSON(filePath) {
+export async function fetchLocalJSON(fileName) {
   try {
-    // Detect GitHub Pages and prepend repo path if needed
+    // Detect GitHub Pages or local/Netlify
     const basePath = window.location.hostname.includes('github.io')
-      ? '/high-school-portal'   // Replace with your repo name
-      : '';                      // Local dev or Netlify
+      ? '/high-school-portal'   // your GitHub repo name
+      : '';
 
-    const res = await fetch(`${basePath}/data/${filePath}`);
+    const url = `${basePath}/data/${fileName}`;
+    console.log('Fetching JSON from:', url);
+
+    const res = await fetch(url);
     if (!res.ok) {
-      throw new Error(`Failed to fetch ${filePath}: ${res.statusText}`);
+      throw new Error(`Failed to fetch ${fileName}: ${res.status} ${res.statusText}`);
     }
-    return await res.json();
+
+    const data = await res.json();
+    console.log('JSON loaded:', data);
+    return data;
+
   } catch (err) {
     console.error('Error fetching JSON:', err);
     return [];
