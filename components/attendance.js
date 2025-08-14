@@ -1,12 +1,12 @@
-import { fetchLocalJSON } from './dataFetcher.js';
+import { fetchJSON } from './dataFetcher.js';
 
 export async function renderAttendance(studentId) {
   const container = document.createElement('div');
   container.className = 'card';
   container.innerHTML = `<h2>Attendance</h2><p>Loading...</p>`;
 
-  const attendance = await fetchLocalJSON('attendance.json');
-  const records = attendance.filter(record => record.studentId === studentId);
+  const attendance = await fetchJSON('attendance');
+  const records = attendance.filter(r => r.studentId === studentId);
 
   container.innerHTML = `
     <h2>Attendance</h2>

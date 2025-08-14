@@ -4,6 +4,7 @@
     "role": "parent",
     "name": "Jane Doe",
     "email": "jane@example.com",
+    "password": "1234",
     "children": [2]
   },
   {
@@ -11,6 +12,7 @@
     "role": "student",
     "name": "John Doe",
     "email": "john@example.com",
+    "password": "abcd",
     "parentId": 1
   },
   {
@@ -18,6 +20,7 @@
     "role": "teacher",
     "name": "Ms. Smith",
     "email": "smith@example.com",
+    "password": "teach1",
     "classes": [1]
   },
   {
@@ -25,6 +28,7 @@
     "role": "teacher",
     "name": "Mr. Brown",
     "email": "brown@example.com",
+    "password": "teach2",
     "classes": [2]
   }
 ]

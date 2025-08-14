@@ -10,8 +10,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:github": "npx vite build",
-    "deploy:github": "npm run build:github && npx gh-pages -d dist",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "preview": "vite preview",
     "test": "jest"
   },

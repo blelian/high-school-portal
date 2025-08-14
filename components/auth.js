@@ -1,4 +1,4 @@
-import { fetchLocalJSON } from './dataFetcher.js';
+import { fetchJSON } from './dataFetcher.js';
 
 export function renderAuth(onLoginSuccess) {
   const container = document.createElement("div");
@@ -23,10 +23,9 @@ export function renderAuth(onLoginSuccess) {
 
   container.querySelector("#loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-
     const email = container.querySelector("#email").value.trim();
     const password = container.querySelector("#password").value.trim();
-    debugLog.textContent = ""; // Clear previous debug logs
+    debugLog.textContent = "";
 
     if (!email || !password) {
       alert("Please enter email and password.");
@@ -34,13 +33,10 @@ export function renderAuth(onLoginSuccess) {
     }
 
     try {
-      const users = await fetchLocalJSON('users.json'); // just filename
-
-      debugLog.textContent += `Login attempt: email='${email}', password='${password}'\n`;
+      const users = await fetchJSON('users');
       debugLog.textContent += `Users loaded: ${JSON.stringify(users)}\n`;
 
       const user = users.find(u => u.email === email && u.password === password);
-
       if (!user) {
         debugLog.textContent += "No matching user found.\n";
         alert("Invalid email or password.");
@@ -49,7 +45,6 @@ export function renderAuth(onLoginSuccess) {
 
       localStorage.setItem("user", JSON.stringify(user));
       debugLog.textContent += `🔐 Logged in user: ${JSON.stringify(user)}\n`;
-      console.log("🔐 Logged in user:", user);
       onLoginSuccess(user);
 
     } catch (err) {
