@@ -10,11 +10,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:github": "vite build --base=/high-school-portal/",
+    "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "preview": "vite preview",
-    "test": "jest",
-     "build:github": "node node_modules/vite/bin/vite.js build"
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",

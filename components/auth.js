@@ -1,4 +1,4 @@
-import { fetchJSON } from './dataFetcher.js';
+import { fetchLocalJSON } from './dataFetcher.js';
 
 export function renderAuth(onLoginSuccess) {
   const container = document.createElement("div");
@@ -23,6 +23,7 @@ export function renderAuth(onLoginSuccess) {
 
   container.querySelector("#loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
+
     const email = container.querySelector("#email").value.trim();
     const password = container.querySelector("#password").value.trim();
     debugLog.textContent = "";
@@ -33,8 +34,8 @@ export function renderAuth(onLoginSuccess) {
     }
 
     try {
-      const users = await fetchJSON('users');
-      debugLog.textContent += `Users loaded: ${JSON.stringify(users)}\n`;
+      const users = await fetchLocalJSON('users.json');
+      debugLog.textContent += `Login attempt: ${email}\nUsers loaded: ${JSON.stringify(users)}\n`;
 
       const user = users.find(u => u.email === email && u.password === password);
       if (!user) {

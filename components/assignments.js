@@ -1,11 +1,11 @@
-import { fetchJSON } from './dataFetcher.js';
+import { fetchLocalJSON } from './dataFetcher.js';
 
 export async function renderAssignments(studentId) {
   const container = document.createElement('div');
   container.className = 'card';
   container.innerHTML = `<h2>Assignments</h2><p>Loading...</p>`;
 
-  const assignments = await fetchJSON('assignments');
+  const assignments = await fetchLocalJSON('assignments.json');
   const studentAssignments = assignments.filter(a => a.studentId === studentId);
 
   if (!studentAssignments.length) {
