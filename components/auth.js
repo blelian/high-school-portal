@@ -30,8 +30,12 @@ export function renderAuth(onLoginSuccess) {
     }
 
     try {
-      // Fetch JSON with repo path for GitHub Pages
-      const users = await fetchLocalJSON('/high-school-portal/data/users.json');
+      // Use dynamic base path depending on environment
+      const basePath = import.meta.env.PROD
+        ? '/high-school-portal'   // GitHub Pages path
+        : '';                     // Local dev server
+
+      const users = await fetchLocalJSON(`${basePath}/data/users.json`);
       const user = users.find(u => u.email === email && u.password === password);
 
       if (!user) {
