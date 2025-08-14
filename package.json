@@ -8,10 +8,10 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "npx vite build",
-    "build:github": "npx vite build --base=/high-school-portal/",
-    "preview": "vite preview",
+    "dev": "node_modules/.bin/vite",
+    "build": "node_modules/.bin/vite build",
+    "build:github": "node_modules/.bin/vite build --base=/high-school-portal/",
+    "preview": "node_modules/.bin/vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "test": "jest"
