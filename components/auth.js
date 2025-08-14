@@ -30,10 +30,10 @@ export function renderAuth(onLoginSuccess) {
     }
 
     try {
-      // Use dynamic base path depending on environment
-      const basePath = import.meta.env.PROD
-        ? '/high-school-portal'   // GitHub Pages path
-        : '';                     // Local dev server
+      // Automatically detect GitHub Pages or local/Netlify
+      const basePath = window.location.hostname.includes('github.io')
+        ? '/high-school-portal'   // GitHub Pages repo path
+        : '';                      // Local dev or Netlify
 
       const users = await fetchLocalJSON(`${basePath}/data/users.json`);
       const user = users.find(u => u.email === email && u.password === password);
