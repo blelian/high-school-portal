@@ -38,6 +38,7 @@ export async function renderCalendar() {
     container.innerHTML = `<h2>School Calendar</h2><p>Error loading events: ${error.message}</p>`;
     console.error(error);
   }
+setTimeout(() => container.classList.add('show'), 50);
 
   return container;
 }

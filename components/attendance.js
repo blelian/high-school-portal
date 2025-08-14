@@ -11,6 +11,7 @@ export async function renderAttendance(studentId) {
       ? `<ul>${records.map(r => `<li>${r.date}: ${r.status}</li>`).join('')}</ul>`
       : `<p>No attendance records found.</p>`
     );
+    setTimeout(() => container.classList.add('show'), 50);
 
   return container;
 }

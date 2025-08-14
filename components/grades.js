@@ -11,6 +11,7 @@ export async function renderGrades(studentId) {
       ? `<ul>${studentGrades.map(g => `<li>Class ${g.classId}: ${g.grade} (${g.term})</li>`).join('')}</ul>`
       : `<p>No grades found.</p>`
     );
+setTimeout(() => container.classList.add('show'), 50);
 
   return container;
 }

@@ -11,6 +11,7 @@ export async function renderMessages(userName) {
       ? `<ul>${userMessages.map(m => `<li><strong>${m.from}</strong> to <strong>${m.to}</strong>: ${m.message} (${m.date})</li>`).join('')}</ul>`
       : `<p>No messages found.</p>`
     );
+setTimeout(() => container.classList.add('show'), 50);
 
   return container;
 }

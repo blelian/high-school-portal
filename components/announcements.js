@@ -15,5 +15,7 @@ export async function renderAnnouncements() {
     <ul>
       ${announcements.map(a => `<li><strong>${a.title}</strong> (${a.date}): ${a.content}</li>`).join('')}
     </ul>`;
+    setTimeout(() => container.classList.add('show'), 50);
+
   return container;
 }

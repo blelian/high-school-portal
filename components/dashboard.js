@@ -12,6 +12,7 @@ export async function renderDashboard(user) {
 
   const quoteComponent = await renderQuote();
   container.appendChild(quoteComponent);
+setTimeout(() => container.classList.add('show'), 50);
 
   return container;
 }

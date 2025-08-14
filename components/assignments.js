@@ -11,6 +11,7 @@ export async function renderAssignments(studentId) {
       ? `<ul>${studentAssignments.map(a => `<li>${a.title} - Due: ${a.dueDate} - ${a.submitted ? 'Submitted' : 'Pending'}</li>`).join('')}</ul>`
       : `<p>No assignments found.</p>`
     );
+setTimeout(() => container.classList.add('show'), 50);
 
   return container;
 }

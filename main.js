@@ -9,12 +9,37 @@ console.log("✅ High School Portal loaded");
 
 let user = getCurrentUser();
 
+// Animate container fade-in
+function fadeIn(element, duration = 300) {
+  element.style.opacity = 0;
+  element.style.transition = `opacity ${duration}ms ease`;
+  requestAnimationFrame(() => {
+    element.style.opacity = 1;
+  });
+}
+
+// Animate container fade-out
+function fadeOut(element, duration = 300) {
+  return new Promise((resolve) => {
+    element.style.transition = `opacity ${duration}ms ease`;
+    element.style.opacity = 0;
+    setTimeout(() => resolve(), duration);
+  });
+}
+
 async function renderView(viewFunction) {
   const app = document.getElementById("app");
-  app.innerHTML = "";
+  const oldContainer = document.getElementById("view-container");
 
+  // Fade out old view if it exists
+  if (oldContainer) {
+    await fadeOut(oldContainer);
+  }
+
+  app.innerHTML = "";
   const container = document.createElement("div");
   container.id = "view-container";
+  container.style.opacity = 0; // start hidden
   app.appendChild(container);
 
   let content;
@@ -33,6 +58,7 @@ async function renderView(viewFunction) {
   }
 
   container.appendChild(content);
+  fadeIn(container);
 }
 
 function renderLoginScreen() {
@@ -43,6 +69,7 @@ function renderLoginScreen() {
     window.location.hash = "dashboard";
   });
   app.appendChild(loginView);
+  fadeIn(loginView);
 }
 
 async function onRouteChange() {
