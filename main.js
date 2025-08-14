@@ -3,43 +3,23 @@ import { renderGrades } from "./components/grades.js";
 import { renderAssignments } from "./components/assignments.js";
 import { renderAttendance } from "./components/attendance.js";
 import { renderMessages } from "./components/messaging.js";
+import { renderCalendar } from "./components/calendar.js";
 import { renderAuth, getCurrentUser, logout } from "./components/auth.js";
 
 console.log("✅ High School Portal loaded");
 
 let user = getCurrentUser();
 
-// Animate container fade-in
-function fadeIn(element, duration = 300) {
-  element.style.opacity = 0;
-  element.style.transition = `opacity ${duration}ms ease`;
-  requestAnimationFrame(() => {
-    element.style.opacity = 1;
-  });
-}
-
-// Animate container fade-out
-function fadeOut(element, duration = 300) {
-  return new Promise((resolve) => {
-    element.style.transition = `opacity ${duration}ms ease`;
-    element.style.opacity = 0;
-    setTimeout(() => resolve(), duration);
-  });
-}
-
 async function renderView(viewFunction) {
   const app = document.getElementById("app");
-  const oldContainer = document.getElementById("view-container");
-
-  // Fade out old view if it exists
-  if (oldContainer) {
-    await fadeOut(oldContainer);
-  }
-
   app.innerHTML = "";
+
   const container = document.createElement("div");
   container.id = "view-container";
-  container.style.opacity = 0; // start hidden
+  container.style.display = 'flex';
+  container.style.justifyContent = 'center';
+  container.style.alignItems = 'center';
+  container.style.flexDirection = 'column';
   app.appendChild(container);
 
   let content;
@@ -58,9 +38,9 @@ async function renderView(viewFunction) {
   }
 
   container.appendChild(content);
-  fadeIn(container);
 }
 
+// Login screen
 function renderLoginScreen() {
   const app = document.getElementById("app");
   app.innerHTML = "";
@@ -69,9 +49,9 @@ function renderLoginScreen() {
     window.location.hash = "dashboard";
   });
   app.appendChild(loginView);
-  fadeIn(loginView);
 }
 
+// Route changes
 async function onRouteChange() {
   const hash = window.location.hash.slice(1);
 
@@ -96,6 +76,9 @@ async function onRouteChange() {
     case "attendance":
       await renderView(renderAttendance);
       break;
+    case "calendar":
+      await renderView(renderCalendar);
+      break;
     case "logout":
       logout();
       window.location.hash = "";
@@ -107,7 +90,7 @@ async function onRouteChange() {
   }
 }
 
-// Listen for hash changes (navigation)
+// Listen for navigation
 window.addEventListener("hashchange", onRouteChange);
 
 // Initial load
