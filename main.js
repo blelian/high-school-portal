@@ -4,6 +4,7 @@ import { renderAssignments } from "./components/assignments.js";
 import { renderAttendance } from "./components/attendance.js";
 import { renderMessages } from "./components/messaging.js";
 import { renderCalendar } from "./components/calendar.js";
+import { renderAnnouncements } from "./components/announcements.js";
 import { renderAuth, getCurrentUser, logout } from "./components/auth.js";
 
 console.log("✅ High School Portal loaded");
@@ -78,6 +79,9 @@ async function onRouteChange() {
       break;
     case "calendar":
       await renderView(renderCalendar);
+      break;
+    case "announcements":
+      await renderView(renderAnnouncements);
       break;
     case "logout":
       logout();

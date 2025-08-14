@@ -20,3 +20,8 @@ export const grades = [
 export const messages = [
   { from: "Jane Doe", to: "John Doe", message: "Hi John!", date: "2025-08-12" }
 ];
+export const announcements = [
+  { title: "Back to School", content: "School starts on Monday, 18 August 2025." },
+  { title: "Holiday Notice", content: "No school on Friday, 22 August 2025." },
+  { title: "Exam Schedule", content: "Midterm exams begin next month. Check your schedule." }
+];
