@@ -3,6 +3,7 @@ import { fetchJSONBin } from './dataFetcher.js';
 export function renderAuth(onLoginSuccess) {
   const container = document.createElement("div");
   container.className = "card";
+
   container.innerHTML = `
     <h2>Login</h2>
     <form id="loginForm">
@@ -34,7 +35,8 @@ export function renderAuth(onLoginSuccess) {
     }
 
     try {
-      const users = await fetchLocalJSON('users.json');
+      // Fetch users from JSONBin
+      const users = await fetchJSONBin('users');
       debugLog.textContent += `Login attempt: ${email}\nUsers loaded: ${JSON.stringify(users)}\n`;
 
       const user = users.find(u => u.email === email && u.password === password);
@@ -46,6 +48,7 @@ export function renderAuth(onLoginSuccess) {
 
       localStorage.setItem("user", JSON.stringify(user));
       debugLog.textContent += `🔐 Logged in user: ${JSON.stringify(user)}\n`;
+
       onLoginSuccess(user);
 
     } catch (err) {
