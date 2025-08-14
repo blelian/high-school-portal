@@ -4,7 +4,8 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
   // Base path for GitHub Pages deployment
-  base: process.env.GITHUB_PAGES ? '/high-school-portal/' : '/',
+  // Make sure to replace 'high-school-portal' with your repo name
+  base: '/high-school-portal/',
 
   // Optional alias for easier imports
   resolve: {
@@ -14,12 +15,12 @@ export default defineConfig({
   },
 
   plugins: [
-    // Copy only JSON files from data folder to dist/data
+    // Copy JSON files from 'data' folder to 'dist/data'
     viteStaticCopy({
       targets: [
         {
-          src: 'data/*.json',
-          dest: 'data',
+          src: 'data/*.json',  // source files in your project
+          dest: 'data',         // destination folder in 'dist'
         },
       ],
     }),
@@ -31,11 +32,11 @@ export default defineConfig({
       input: path.resolve(__dirname, 'index.html'),
     },
 
-    // Keep JS modules bundled correctly
+    // Output directory
     outDir: 'dist',
     emptyOutDir: true,
   },
 
-  // Treat data folder as static assets (optional, for local fetches)
-  publicDir: false,
+  // Treat 'public' as normal Vite public folder
+  publicDir: 'public',
 });
