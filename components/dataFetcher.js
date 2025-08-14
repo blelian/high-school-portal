@@ -1,4 +1,5 @@
-// dataFetcher.js
+// components/dataFetcher.js
+
 const MASTER_KEY = '$2a$10$5.mnlL9UuMbrX6BvH6FUmOU5EPySbRonmr8.gDv/QFg.BaWuOcvL2';
 
 const BIN_URLS = {
@@ -30,6 +31,21 @@ export async function fetchJSONBin(key) {
     return data.record; // JSONBin v3 stores actual data in .record
   } catch (err) {
     console.error(`Error fetching ${key}:`, err);
+    return [];
+  }
+}
+
+/**
+ * Fetch local JSON file (e.g., announcements.json)
+ * @param {string} filePath - path to the local JSON file
+ */
+export async function fetchLocalJSON(filePath) {
+  try {
+    const res = await fetch(filePath);
+    if (!res.ok) throw new Error(`Failed to fetch ${filePath}`);
+    return await res.json();
+  } catch (err) {
+    console.error(`Error fetching local JSON ${filePath}:`, err);
     return [];
   }
 }
