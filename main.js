@@ -12,6 +12,7 @@ console.log("✅ High School Portal loaded");
 
 let user = getCurrentUser();
 
+// Renders a view function into #app
 async function renderView(viewFunction) {
   const app = document.getElementById("app");
   app.innerHTML = "";
@@ -20,37 +21,28 @@ async function renderView(viewFunction) {
   container.id = "view-container";
   app.appendChild(container);
 
+  let content;
   switch (viewFunction) {
     case renderGrades:
     case renderAssignments:
     case renderAttendance:
-      {
-        const content = await viewFunction(user.email);
-        container.appendChild(content);
-      }
+      content = await viewFunction(user.email);
       break;
     case renderMessages:
-      {
-        const content = await viewFunction(user.name);
-        container.appendChild(content);
-      }
+      content = await viewFunction(user.name);
       break;
     case renderDashboard:
-      {
-        // Dashboard is async now because of quote fetch or other data
-        const content = await viewFunction(user);
-        container.appendChild(content);
-      }
+      content = await viewFunction(user);
       break;
     default:
-      {
-        const content = await viewFunction(user);
-        container.appendChild(content);
-      }
+      content = await viewFunction(user);
       break;
   }
+
+  container.appendChild(content);
 }
 
+// Display login screen
 function renderLoginScreen() {
   const app = document.getElementById("app");
   app.innerHTML = "";
@@ -61,6 +53,7 @@ function renderLoginScreen() {
   app.appendChild(loginView);
 }
 
+// Handle routing based on hash
 async function onRouteChange() {
   const hash = window.location.hash.slice(1);
 
@@ -101,11 +94,14 @@ async function onRouteChange() {
       break;
     default:
       window.location.hash = "dashboard";
+      break;
   }
 }
 
+// Listen for hash changes
 window.addEventListener("hashchange", onRouteChange);
 
+// Initial page load
 if (!user) {
   renderLoginScreen();
 } else {
