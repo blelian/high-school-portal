@@ -9,8 +9,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "build:github": "vite build --base=/high-school-portal/",
+    "build": "npx vite build",
+    "build:github": "npx vite build --base=/high-school-portal/",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
