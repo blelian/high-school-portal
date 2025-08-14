@@ -3,8 +3,8 @@ import path from 'path';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
-  // Base path for GitHub Pages deployment
-  base: '/high-school-portal/', // MUST match your repo name
+  // Relative paths for Netlify deployment
+  base: './',
 
   // Optional alias for easier imports
   resolve: {
@@ -14,13 +14,11 @@ export default defineConfig({
   },
 
   plugins: [
-    // Copy JSON files from 'data' folder to 'dist/data'
+    // Copy JSON and JS components to dist
     viteStaticCopy({
       targets: [
-        {
-          src: 'data/*.json',
-          dest: 'data',
-        },
+        { src: 'data/*.json', dest: 'data' },
+        { src: 'components/*.js', dest: 'components' }
       ],
     }),
   ],
