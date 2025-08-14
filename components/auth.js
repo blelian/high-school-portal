@@ -1,4 +1,4 @@
-import { fetchLocalJSON } from './dataFetcher.js';
+import { fetchJSONBin } from './dataFetcher.js';
 
 export function renderAuth(onLoginSuccess) {
   const container = document.createElement("div");
