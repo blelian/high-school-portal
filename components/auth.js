@@ -29,16 +29,24 @@ export function renderAuth(onLoginSuccess) {
       return;
     }
 
-    const users = await fetchLocalJSON('users.json'); // path stays the same
-    const user = users.find(u => u.email === email);
-    if (!user) {
-      alert("User not found.");
-      return;
-    }
+    try {
+      // Fetch JSON with repo path for GitHub Pages
+      const users = await fetchLocalJSON('/high-school-portal/data/users.json');
+      const user = users.find(u => u.email === email && u.password === password);
 
-    localStorage.setItem("user", JSON.stringify(user));
-    console.log("🔐 Logged in user:", user);
-    onLoginSuccess(user);
+      if (!user) {
+        alert("Invalid email or password.");
+        return;
+      }
+
+      localStorage.setItem("user", JSON.stringify(user));
+      console.log("🔐 Logged in user:", user);
+      onLoginSuccess(user);
+
+    } catch (err) {
+      console.error("Error fetching users:", err);
+      alert("Login failed. Please try again later.");
+    }
   });
 
   return container;
