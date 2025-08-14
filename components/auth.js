@@ -2,7 +2,7 @@ import { users } from './data.js';
 
 export function renderAuth(onLoginSuccess) {
   const container = document.createElement("div");
-  container.className = "card";
+  container.className = "card show"; // Ensure login is visible immediately
 
   container.innerHTML = `
     <h2>Login</h2>
@@ -49,11 +49,13 @@ export function renderAuth(onLoginSuccess) {
   return container;
 }
 
+// Get currently logged in user from localStorage
 export function getCurrentUser() {
   const storedUser = localStorage.getItem("user");
   return storedUser ? JSON.parse(storedUser) : null;
 }
 
+// Logout user
 export function logout() {
   localStorage.removeItem("user");
 }
